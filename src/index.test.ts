@@ -2,15 +2,16 @@ import { MCEvent } from '@managed-components/types'
 import { sendEvent } from '.'
 
 const isRecentTs = (value: string) => {
-  const now = new Date().valueOf();
-  let ts = parseInt(value);
-  return ts <= now && ts > now - 10000;
+  const now = new Date().valueOf()
+  const ts = parseInt(value)
+  return ts <= now && ts > now - 10000
 }
 
 const dummyClient = {
   title: 'Zaraz "Test" /t Page',
   timestamp: 1670502437,
-  userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36',
+  userAgent:
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36',
   language: 'en-GB',
   referer: '',
   ip: '127.0.0.1',
@@ -35,7 +36,7 @@ describe('Tatari MC identify event handler works correctly', () => {
 
   const fakeEvent = new Event('identify', {}) as MCEvent
   fakeEvent.payload = {
-    identify: 'identifyEmail@email.com', 
+    identify: 'identifyEmail@email.com',
   }
   fakeEvent.client = {
     ...dummyClient,
@@ -49,7 +50,7 @@ describe('Tatari MC identify event handler works correctly', () => {
     },
   }
 
-  sendEvent(settings.key)(fakeEvent);
+  sendEvent(settings.key)(fakeEvent)
 
   it('creates the identify request correctly', async () => {
     expect(fetchedRequest).toBeTruthy()
@@ -77,7 +78,9 @@ describe('Tatari MC identify event handler works correctly', () => {
 
   it('sets the cookies correctly', () => {
     expect(setCookie).toBeTruthy()
-    expect(setCookie.value).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/)
+    expect(setCookie.value).toMatch(
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
+    )
     expect(setCookie.key).toEqual(cookieName)
   })
 })
@@ -88,7 +91,7 @@ describe('Tatari MC track event handler works correctly', () => {
 
   const fakeEvent = new Event('track', {}) as MCEvent
   fakeEvent.payload = {
-    somedata: 'somevalue'
+    somedata: 'somevalue',
   }
   fakeEvent.client = {
     ...dummyClient,
@@ -102,7 +105,7 @@ describe('Tatari MC track event handler works correctly', () => {
     },
   }
 
-  sendEvent(settings.key)(fakeEvent);
+  sendEvent(settings.key)(fakeEvent)
 
   it('creates the track request correctly', async () => {
     expect(fetchedRequest).toBeTruthy()
@@ -134,7 +137,9 @@ describe('Tatari MC track event handler works correctly', () => {
 
   it('sets the cookies correctly', () => {
     expect(setCookie).toBeTruthy()
-    expect(setCookie.value).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/)
+    expect(setCookie.value).toMatch(
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
+    )
     expect(setCookie.key).toEqual(cookieName)
   })
 })
