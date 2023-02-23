@@ -11,7 +11,6 @@ Find out more about Managed Components [here](https://blog.cloudflare.com/zaraz-
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![All Contributors](https://img.shields.io/github/all-contributors/managed-components/snapchat?color=ee8449&style=flat-square)](#contributors)
 
-
 ## 🚀 Quickstart local dev environment
 
 1. Make sure you're running node version >=18.
@@ -29,6 +28,10 @@ The Account Key is your unique identifier at Tatari.
 ## 🧱 Fields Description
 
 > Fields are properties that can/must be sent with certain events
+
+### Identifier `string`
+
+Identify event requires entering a unique visitor Identifier.
 
 ## 📝 License
 
