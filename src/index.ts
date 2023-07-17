@@ -3,7 +3,8 @@ import UAParser from 'ua-parser-js'
 
 export const sendEvent = (key: string) => (event: MCEvent) => {
   const { client, payload } = event
-  const { identify, timestamp, ...customFields } = payload
+  const { identify, timestamp, TATARI_identify, TATARI_name, ...customFields } =
+    payload
   const { name: $os } = new UAParser(event.client.userAgent).getOS()
 
   const cookieName = 'session-cookie'
@@ -21,11 +22,13 @@ export const sendEvent = (key: string) => (event: MCEvent) => {
     cookieSupport: 'PERSIST',
     token: key,
     sessionId,
-    event: event.type,
+    event: TATARI_name || event.type,
     $os,
     $currentUrl: client.url.href,
     $referrer: client.referer,
-    ...(identify && { userId: identify }),
+    ...((TATARI_identify || identify) && {
+      userId: TATARI_identify || identify,
+    }),
     ...(hasCustomFields && { arg: JSON.stringify(customFields) }),
   })
 
