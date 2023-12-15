@@ -1,10 +1,15 @@
 import { MCEvent } from '@managed-components/types'
+import crypto from 'crypto'
 import { sendEvent } from '.'
 
 const isRecentTs = (value: string) => {
   const now = new Date().valueOf()
   const ts = parseInt(value)
   return ts <= now && ts > now - 10000
+}
+
+if (!global.crypto) {
+  vi.stubGlobal('crypto', crypto)
 }
 
 const dummyClient = {
